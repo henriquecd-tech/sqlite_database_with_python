@@ -38,3 +38,14 @@ def add_many(list):
     c.execute("INSERT INTO customer VALUES (?, ?, ?)", list)
     conn.commit()
     conn.close()
+
+
+def email_lookup(email):
+    conn = sqlite3.connect('customer.db')
+    c = conn.cursor()
+    c.execute("SELECT * from customer WHERE email = (?)", (email,))
+    items = c.fetchall()
+    for item in items:
+        print(item)
+    conn.commit()
+    conn.close()
